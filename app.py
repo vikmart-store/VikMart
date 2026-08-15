@@ -188,7 +188,7 @@ def admin_login():
 
         error = "Invalid username or password."
 
-        return render_template("admin_login.html", error=error)
+    return render_template("admin_login.html", error=error)
 
 @app.post("/admin/logout")
 def admin_logout():
