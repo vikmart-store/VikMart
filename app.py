@@ -181,7 +181,8 @@ def admin_login():
     if request.method == "POST":
         username = request.form.get("username", "")
         password = request.form.get("password", "")
-       
+       print("AUTH DEBUG:", repr(username), "USER_SET:", bool(ADMIN_USERNAME), "PASS_SET:", bool(ADMIN_PASSWORD))
+print("MATCH:", username == ADMIN_USERNAME, password == ADMIN_PASSWORD)
         if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
             session["admin_logged_in"] = True
             return redirect(url_for("admin_dashboard"))
