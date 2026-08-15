@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vikash Mart - Cart</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+<header class="top"><a class="brand" href="{{ url_for('home') }}">Vik<span>Mart</span></a><a class="cart-link" href="{{ url_for('home') }}">Continue shopping</a></header>
+<main class="wrap narrow">
+  <div class="section-head"><div><p class="eyebrow">SHOPPING CART</p><h1>Your cart</h1></div></div>
+  {% if items %}
+  <div class="cart-layout">
+    <section>
+    {% for item in items %}
+      <article class="cart-item">
+        <img src="{{ item.product.image }}" alt="{{ item.product.name }}">
+        <div class="cart-info"><small>{{ item.product.category }}</small><h3>{{ item.product.name }}</h3><strong>₹{{ '%.0f'|format(item.product.price) }}</strong>
+        <form method="post" action="{{ url_for('update_cart', product_id=item.product.id) }}" class="qty">
+          <label>Qty <input type="number" min="0" name="qty" value="{{ item.qty }}"></label><button class="link-btn">Update</button>
+        </form>
+        <form method="post" action="{{ url_for('remove', product_id=item.product.id) }}"><button class="remove">Remove</button></form>
+        </div>
+        <strong>₹{{ '%.0f'|format(item.subtotal) }}</strong>
+      </article>
+    {% endfor %}
+    </section>
+    <aside class="summary"><h2>Order summary</h2><div><span>Subtotal</span><strong>₹{{ '%.0f'|format(total) }}</strong></div><div><span>Delivery</span><strong>FREE</strong></div><hr><div class="grand"><span>Total</span><strong>₹{{ '%.0f'|format(total) }}</strong></div><a class="btn dark full" href="{{ url_for('checkout') }}">Proceed to checkout</a></aside>
+  </div>
+  {% else %}<div class="empty"><div class="big">🛒</div><h2>Your cart is empty</h2><p>Add something you like from our products.</p><a class="btn dark" href="{{ url_for('home') }}">Start shopping</a></div>{% endif %}
+</main>
+</body></html>

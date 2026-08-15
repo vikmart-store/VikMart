@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vikash Mart - Online Shopping</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="{{ url_for('home') }}">Vik<span>Mart</span></a>
+  <form class="search" action="{{ url_for('home') }}">
+    <input name="q" value="{{ q }}" placeholder="Search products..." aria-label="Search">
+    <button>Search</button>
+  </form>
+  <a class="cart-link" href="{{ url_for('cart') }}">🛒 Cart</a>
+</header>
+
+<nav class="nav">
+  <a href="{{ url_for('home') }}">All</a>
+  <a href="{{ url_for('home', category='Home') }}">Home</a>
+  <a href="{{ url_for('home', category='Electronics') }}">Electronics</a>
+  <a href="{{ url_for('home', category='Fashion') }}">Fashion</a>
+  <a href="{{ url_for('home', category='Books') }}">Books</a>
+</nav>
+
+<section class="hero">
+  <div>
+    <p class="eyebrow">WELCOME TO Vikash Mart </p>
+    <h1>Shop smart. <br>Live better.</h1>
+    <p>Discover useful products at simple, affordable prices.</p>
+    <a class="btn dark" href="#products">Shop now</a>
+  </div>
+  <div class="hero-card">🛍️<strong>Fresh deals</strong><small>New products every week</small></div>
+</section>
+
+<main id="products" class="wrap">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">OUR PRODUCTS</p>
+      <h2>{% if category != 'All' %}{{ category }}{% else %}Popular products{% endif %}</h2>
+    </div>
+    <span>{{ products|length }} products</span>
+  </div>
+
+  <div class="grid">
+  {% for p in products %}
+    <article class="product">
+      <div class="image-wrap">
+        <img src="{{ p.image }}" alt="{{ p.name }}" oneclick="openGallery('{{p.image}}','{{p,image2}}')">
+    
+        {% if p.image2 %}
+            <img src="{{ p.image2 }}" alt="{{ p.name }}" style="display:none;">
+        {% endif %}
+    </div>
+      <div class="product-body">
+        <small>{{ p.category }}</small>
+        <h3>{{ p.name }}</h3>
+        <p>{{ p.description }}</p>
+        <div class="buy-row">
+          <strong>₹{{ '%.0f'|format(p.price) }}</strong>
+          <form method="post" action="{{ url_for('add', product_id=p.id) }}"><button class="btn">Add to cart</button></form>
+        </div>
+      </div>
+    </article>
+  {% else %}
+    <div class="empty"><h3>No products found</h3><a href="{{ url_for('home') }}">View all products</a></div>
+  {% endfor %}
+  </div>
+</main>
+
+<footer><strong>Vikash Mart</strong><span>Original demo store • Built with Flask</span></footer>
+
+<div id="imageViewer" class="image-viewer">
+    <button onclick="zoomOut()">−</button>
+    <img id="viewerImage">
+    <button onclick="zoomIn()">+</button>
+    <span onclick="closeImage()">×</span>
+</div>
+
+<script>
+let zoom = 1;
+
+function openImage(src) {
+    zoom = 1;
+    document.getElementById("viewerImage").src = src;
+    document.getElementById("imageViewer").style.display = "flex";
+}
+
+function closeImage() {
+    document.getElementById("imageViewer").style.display = "none";
+}
+
+function zoomIn() {
+    zoom += 0.2;
+    document.getElementById("viewerImage").style.transform = "scale(" + zoom + ")";
+}
+
+function zoomOut() {
+    if (zoom > 0.4) {
+        zoom -= 0.2;
+        document.getElementById("viewerImage").style.transform = "scale(" + zoom + ")";
+    }
+}
+</script>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vikash Mart - Checkout</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+<header class="top"><a class="brand" href="{{ url_for('home') }}">Vik<span>Mart</span></a></header>
+<main class="wrap narrow">
+  <div class="section-head"><div><p class="eyebrow">SECURE CHECKOUT</p><h1>Delivery details</h1></div></div>
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  <div class="checkout-grid">
+    <form class="form-card" method="post">
+      <label>Full name<input name="name" required></label>
+      <label>Phone number<input name="phone" required></label>
+      <label>Delivery address<textarea name="address" rows="5" required></textarea></label>
+      <button class="btn dark full" type="submit">Place order • ₹{{ '%.0f'|format(total) }}</button>
+    </form>
+    <aside class="summary"><h2>Order total</h2><div><span>Items</span><strong>{{ items|length }}</strong></div><hr><div class="grand"><span>Total</span><strong>₹{{ '%.0f'|format(total) }}</strong></div><p class="muted">Demo checkout: connect a payment gateway before accepting real payments.</p></aside>
+  </div>
+</main>
+</body></html>

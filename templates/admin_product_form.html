@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vikash Mart - {{ 'Edit Product' if product else 'Add Product' }}</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+<header class="top"><a class="brand" href="{{ url_for('home') }}">Vik<span>Mart</span></a><a class="cart-link" href="{{ url_for('admin_dashboard') }}">← Admin Dashboard</a></header>
+<main class="wrap narrow">
+  <div class="section-head"><div><p class="eyebrow">ADMIN PANEL</p><h1>{{ 'Edit Product' if product else 'Add Product' }}</h1></div></div>
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  <form method="post" class="form-card admin-form">
+    <label>Product name<input name="name" value="{{ product.name if product else '' }}" required></label>
+    <label>Price (₹)<input type="number" name="price" min="0" step="0.01" value="{{ product.price if product else '' }}" required></label>
+    <label>Image URL<input type="text" name="image" value="{{ product.image if product else '' }}" required></label>
+    <label>Category<input name="category" value="{{ product.category if product else '' }}" placeholder="Electronics / Fashion / Home" required></label>
+    <label>Description<textarea name="description" rows="5" required>{{ product.description if product else '' }}</textarea></label>
+    <div class="form-actions"><button class="btn dark" type="submit">{{ 'Save Changes' if product else 'Add Product' }}</button><a class="btn" href="{{ url_for('admin_dashboard') }}">Cancel</a></div>
+  </form>
+</main></body></html>
