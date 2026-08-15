@@ -5,11 +5,11 @@ from datetime import datetime
 from functools import wraps
 
 app = Flask(__name__)
-app.secret_key = os.environ.get("SECRET_KEY", "Vkmart_5%9t#95687@!umpR$VT")
+app.secret_key = os.environ.get("SECRET_KEY")
 
 DB = os.path.join(os.path.dirname(os.path.abspath(__file__)), "shop.db")
-ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "Mystore")
-ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "Vikash#&@8276")
+ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 
 
 def db():
