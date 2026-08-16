@@ -27,18 +27,18 @@
 <section class="hero">
   <div>
     <p class="eyebrow">WELCOME TO Vikash Mart </p>
-    <h1>Shop smart. <br>Live better.</h1>
-    <p>Discover useful products at simple, affordable prices.</p>
+    <h1>Find Exactly<br>What You Need.</h1>
+    <p>Quality electronics, fashion, books, and more — all in one place.</p>
     <a class="btn dark" href="#products">Shop now</a>
   </div>
-  <div class="hero-card">🛍️<strong>Fresh deals</strong><small>New products every week</small></div>
+  <div class="hero-card">🛍️<strong>What's new</strong><small>Take a look at our latest products</small></div>
 </section>
 
 <main id="products" class="wrap">
   <div class="section-head">
     <div>
       <p class="eyebrow">OUR PRODUCTS</p>
-      <h2>{% if category != 'All' %}{{ category }}{% else %}Popular products{% endif %}</h2>
+      <h2>{% if category != 'All' %}{{ category }}{% else %}Featured products{% endif %}</h2>
     </div>
     <span>{{ products|length }} products</span>
   </div>
