@@ -38,11 +38,11 @@ def init_db():
     )""")
     if conn.execute("SELECT COUNT(*) FROM products").fetchone()[0] == 0:
         products = [
-            ("Smart Watch", 1999, "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80", "Electronics", "Modern smart watch for everyday fitness and notifications."),
-            ("Bluetooth Speaker", 899, "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=600&q=80", "Electronics", "Portable speaker with powerful sound."),
-            ("Running Shoes", 1499, "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80", "Fashion", "Lightweight shoes for running and daily use."),
-            ("Backpack", 999, "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80", "Fashion", "Durable backpack for school, work and travel."),
-            ("Coffee Mug", 399, "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=600&q=80", "Home", "Simple ceramic mug for tea and coffee.")
+            ("Smart Watch", 1999, "/static/products/Smart%20watch.jpg", "Electronics", "Modern smart watch for everyday fitness and notifications."),
+            ("Bluetooth Speaker", 899, "/static/products/Bluetooth%20Speaker.jpg", "Electronics", "Portable speaker with powerful sound."),
+            ("Running Shoes", 1499, "/static/products/Running%20Shoes.jpg", "Fashion", "Lightweight shoes for running and daily use."),
+            ("Backpack", 999, "/static/products/Backpack.jpg", "Fashion", "Durable backpack for school, work and travel."),
+            ("Coffee Mug", 399, "/static/products/coffee-mug.jpg", "Home", "Simple ceramic mug for tea and coffee.")
         ]
         conn.executemany(
             "INSERT INTO products(name,price,image,category,description) VALUES(?,?,?,?,?)",
