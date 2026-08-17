@@ -51,6 +51,25 @@ def init_db():
     conn.commit()
     conn.close()
 
+def update_product_images():
+    conn = db()
+
+    updates = [
+        ("Smart Watch", "/static/products/Smart%20watch.jpg"),
+        ("Bluetooth Speaker", "/static/products/Bluetooth%20Speaker.jpg"),
+        ("Running Shoes", "/static/products/Running%20Shoes.jpg"),
+        ("Backpack", "/static/products/Backpack.jpg"),
+        ("Coffee Mug", "/static/products/coffee-mug.jpg"),
+    ]
+
+    for name, image in updates:
+        conn.execute(
+            "UPDATE products SET image = ? WHERE name = ?",
+            (image, name)
+        )
+
+    conn.commit()
+    conn.close()
 
 def admin_required(view):
     @wraps(view)
@@ -307,6 +326,6 @@ def admin_delete_product(product_id):
 
 # Initialize tables when running directly or through Gunicorn.
 init_db()
-
+update_product_images()
 if __name__ == "__main__":
     app.run(debug=False)
